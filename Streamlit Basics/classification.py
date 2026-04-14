@@ -11,6 +11,7 @@ def load_data():
     return df, data.target_names
 
 df,data_target_names = load_data()
+print(df.head())
 
 model = RandomForestClassifier()
 model.fit(df.iloc[:, :-1], df['species'])
