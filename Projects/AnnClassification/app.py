@@ -3,6 +3,8 @@ import numpy as np
 import tensorflow as tf
 import pickle
 from tensorflow.keras.models import load_model
+from pathlib import Path
+
 import pandas as pd
 
 st.set_page_config(page_title="Churn Predictor", page_icon="📊", layout="centered")
@@ -209,15 +211,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-model = load_model('ann_model.h5')
+BASE_DIR = Path(__file__).resolve().parent
 
-with open('label_encoder_gender.pkl', 'rb') as f:
+model = load_model(BASE_DIR / "ann_model.h5")
+
+with open(BASE_DIR / "label_encoder_gender.pkl", "rb") as f:
     label_encoder_gender = pickle.load(f)
 
-with open('one_hot_encoder_geo.pkl', 'rb') as f:
+with open(BASE_DIR / "one_hot_encoder_geo.pkl", "rb") as f:
     one_hot_encoder_geo = pickle.load(f)
 
-with open('scaler.pkl', 'rb') as f:
+with open(BASE_DIR / "scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 st.markdown('<div class="main-title">🔮 Customer Churn Predictor</div>', unsafe_allow_html=True)
